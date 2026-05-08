@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mini Data Center Operations Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Mini DC</h2>
+        <p>Overview</p>
+        <p>Monitoring</p>
+        <p>Security</p>
+        <p>Incidents</p>
+        <p>Inventory</p>
+    </div>
+
+    <div class="main">
+        <h1>Mini Data Center Operations Dashboard</h1>
+        <p>Monitoring • Security • Incidents • Inventory</p>
+
+        <div class="cards">
+            <div class="card green">
+                <h3>Servers Online</h3>
+                <h2>{{ online_count }}</h2>
+            </div>
+
+            <div class="card red">
+                <h3>Servers Offline</h3>
+                <h2>{{ offline_count }}</h2>
+            </div>
+        </div>
+
+        <div class="table-box">
+            <h2>Server Status</h2>
+
+            <table>
+                <tr>
+                    <th>Server Name</th>
+                    <th>IP Address</th>
+                    <th>Status</th>
+                </tr>
+
+                {% for server in servers %}
+                <tr>
+                    <td>{{ server.name }}</td>
+                    <td>{{ server.ip }}</td>
+                    <td>
+                        <span class="{{ 'online' if server.status == 'Online' else 'offline' }}">
+                            {{ server.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
